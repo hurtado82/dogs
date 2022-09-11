@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const axios = require("axios") 
+const { Breed , Dog, Temperament}  = require("../db.js")
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -23,13 +24,11 @@ router.get("/dogs", (req, res) => {
       if (name) {
         const nameSearch = breeds.filter( (b) => b.name.toLowerCase().startsWith(name.toLowerCase()) === true );
         if (!nameSearch.length) return res.status(404).send("Breed no found");
-        else {
-          res.status(200).send(nameSearch);
-        }
-
+        else res.status(200).send(nameSearch);
+        
       } else {
-        const breedName = breedsByName(breeds);
-        res.status(200).send(breedName);
+        // const breedName = breedsByName(breeds);
+        res.status(200).send(breeds);
       }
     });
 });
@@ -44,9 +43,16 @@ router.get("/dogs/:id",(req, res) => {
     })
 })
 
-router.post("/dogs", (req, res) => {
+router.post("/dogs", async (req, res) => {
  const body = req.body
- res.status(201).send(body)
+ console.log(body)
+ try {
+   const newBreed = await Breed.create(body)
+   res.status(201).send(newBreed);
+ }
+ catch(error) {
+   res.status(404).send(error)
+ }
 })
 
 router.get("/temperaments", (req, res) => {
