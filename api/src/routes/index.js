@@ -13,7 +13,7 @@ const router = Router();
 const breedsByName = (breed) => {
  return breed.map((b) => b.name);
 }
-
+//busqueda dogs y dogs + query 
 router.get("/dogs", (req, res) => {
   const {name} = req.query;
   console.log(name)
@@ -35,12 +35,20 @@ router.get("/dogs", (req, res) => {
 
 router.get("/dogs/:id",(req, res) => {
   const { id } = req.params
-  console.log(id)
-  axios.get(`https://api.thedogapi.com/v1/breeds/${id}`)
+  console.log("params:", typeof(id))
+  try {
+    axios.get("https://api.thedogapi.com/v1/breeds")
     .then((data) => data.data)
     .then((breeds) => {
-  res.status(200).send(breeds)
+      const SEARCH = breeds.filter((b) => b.id === parseInt(id) )
+      let searchFound = SEARCH[0]
+      SEARCH.length
+        ? res.status(200).send(searchFound)
+        : res.status(404).send("no found");
     })
+  }catch(error) {
+    res.sendStatus().send(error)
+  }
 })
 
 router.post("/dogs", async (req, res) => {

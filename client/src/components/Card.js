@@ -1,10 +1,16 @@
-// import { useDispatch, useSelector } from "react-redux";
-export default function Card(props) {
-  // const dogs = useSelector((state) => state.getAllDogs);
+import { Link } from "react-router-dom";
+
+export default function Card({ id, name, image, weight, temperament, height, age}) {
   return (
     <div>
-      <div>Name: {props.name}</div>
-      <img src={props.image} width="300" />
+       <Link to={`/dogs/${id}`}>
+        <div>Name: {name}</div>
+        <div>Weight: {weight}</div>
+        <div>Temperament: {temperament}</div>
+        <div>{height}</div>
+        <div>{age}</div>
+        <img src={image} width="300" alt={name}/>
+      </Link>
     </div>
   );
 }
