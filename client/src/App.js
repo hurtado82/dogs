@@ -7,12 +7,13 @@ import Home from "./components/Home"
 import DogDetail from "./components/DogDetail"
 
 function App() {
+ 
   return (
     <div className="App">
-      <Header />
-      <LandingPage />
-      <Route exact path="/dogs" component={Home}  />
-      <Route exact path="/dogs/:id" component={DogDetail}  />
+      <Route exact path="/" component={LandingPage} />
+      <Route exact path="/dogs" component={Header} />
+      <Route exact path="/dogs" component={Home} />
+      <Route exact path="/dogs/:id" component={DogDetail} />
     </div>
   );
 }

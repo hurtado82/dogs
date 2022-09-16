@@ -15,14 +15,14 @@ const breedsByName = (breed) => {
 }
 //busqueda dogs y dogs + query 
 router.get("/dogs", (req, res) => {
-  const {name} = req.query;
-  console.log(name)
+  const { name } = req.query;
+  console.log("name:", name)
   axios
     .get("https://api.thedogapi.com/v1/breeds")
     .then((data) => data.data)
     .then((breeds) => {
       if (name) {
-        const nameSearch = breeds.filter( (b) => b.name.toLowerCase().startsWith(name.toLowerCase()) === true );
+        const nameSearch = breeds.filter( (b) => b.name.toLowerCase().includes(name.toLowerCase()) === true );
         if (!nameSearch.length) return res.status(404).send("Breed no found");
         else res.status(200).send(nameSearch);
         

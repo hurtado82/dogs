@@ -1,0 +1,9 @@
+.main-container {
+    background: green;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* position: fixed; */
+    height: fit-content;
+}

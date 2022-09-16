@@ -1,28 +1,29 @@
-import Card from "./Card";
-import { getDogDetail } from "../redux/actions";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { getDogDetail } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function DogDetail() {
-  const DETAIL = useSelector(state => state.getDetail)
+  const { name, image, weight, temperament, life_span, height } = useSelector(
+    (state) => state.getDetail
+  );
   const { id } = useParams()
-  const DISPATCH = useDispatch()
+  const dispatch = useDispatch();
+  
   useEffect(() => {
-    DISPATCH(getDogDetail(id));
-  }, [DISPATCH, id]);
-  console.log("DETAIL:", DETAIL);
+    dispatch(getDogDetail(id));
+  }, [dispatch, id]);
   return (
     <div>
       <h2>Detail</h2>
-      {DETAIL.weight ? (
+      {weight ? (
         <div>
-          <h2>Name: {DETAIL.name}</h2>
-          <img src={DETAIL.image.url} width="300" alt={DETAIL.name} />
-          <p>Temperament: {DETAIL.temperament}</p>
-          <p>Age: {DETAIL.life_span}</p>
-          <p>Weight: {DETAIL.weight?.metric}</p>
-          <p>Height: {DETAIL.height?.metric}</p>
+          <h2>{name}</h2>
+          <img src={image.url} width="600" alt={name} />
+          <p>Temperament: {temperament}</p>
+          <p>Age: {life_span}</p>
+          <p>Weight: {weight?.metric}</p>
+          <p>Height: {height?.metric}</p>
         </div>
       ) : null}
     </div>
