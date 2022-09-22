@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
 import "../css/Card.css"
+import { Link } from "react-router-dom";
 
 export default function Card({ id, name, image, weight, temperament, height, age}) {
+  
   return (
     <div>
       <div className="card-box">

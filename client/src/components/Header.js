@@ -1,13 +1,19 @@
-import Search from "./Search"
+import { Link } from "react-router-dom";
 import "../css/Header.css"
+import Search from "./Search"
 
-function Header() {
+function Header({ select, clickOnSearch }) {
   return (
     <header className="main-container">
       <div>
         <h1>Dogs World</h1>
       </div>
-      <Search />
+      <Link to={"create"}>
+        <button >Create</button>
+      </Link>
+      <Search
+        select={select}
+        clickOnSearch={clickOnSearch} />
     </header>
   );
 }

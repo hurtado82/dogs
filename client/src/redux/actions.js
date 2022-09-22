@@ -1,7 +1,7 @@
 export const GET_DOGS = "GET_DOGS";
-export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 export const INPUT_SEARCH = "INPUT_SEARCH";
 export const SELECT_OPTION = "SELECT_OPTION";
+export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 
 export function getDogs(byName) {
   return function(dispatch) {   
@@ -31,11 +31,11 @@ export function getDogDetail(id) {
   }
 }
 
-export function inputSearch(str) {
-  return function(dispatch) {
-    dispatch({ type: INPUT_SEARCH, payload: str });
-  }
-}
+// export function inputSearch(str) {
+//   return function(dispatch) {
+//     dispatch({ type: INPUT_SEARCH, payload: str });
+//   }
+// }
 
 export function selectOption(option) {
   return function (dispatch) {

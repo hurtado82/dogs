@@ -1,4 +1,4 @@
-import { GET_DOGS, GET_DOG_DETAIL, INPUT_SEARCH, SELECT_OPTION} from "./actions"
+import { GET_DOGS, GET_DOG_DETAIL, SELECT_OPTION} from "./actions"
 
 const initialState = {
   getAllDogs: [],
@@ -19,11 +19,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         getDetail: action.payload,
       };
-    case INPUT_SEARCH:
-      return {
-        ...state,
-        inputSearch: action.payload,
-      };
+    // case INPUT_SEARCH:
+    //   return {
+    //     ...state,
+    //     inputSearch: action.payload,
+    //   };
     case SELECT_OPTION:
       return {
         ...state,

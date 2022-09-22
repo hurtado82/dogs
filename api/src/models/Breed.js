@@ -9,6 +9,7 @@ module.exports = (sequelize) => {
     height: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      
     },
     weight: {
       type: DataTypes.FLOAT,

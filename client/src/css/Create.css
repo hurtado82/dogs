@@ -1,0 +1,21 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.container-form {
+  padding: 3rem;
+  background-color: aqua;
+  display: grid; 
+}
+/* form {
+    width: 40%;
+} */
+.label-form {
+    width: 30%;
+    text-align: left;
+    padding-top:0.5rem ;
+}

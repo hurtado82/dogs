@@ -1,11 +1,11 @@
-.container-cards {
+ .container-cards {
     display: grid;
     grid-template-columns: repeat( 4, 1fr );
-}
+} 
  img { 
     max-width: 100%;
     max-height: 200px; 
-}
+} 
 /* width="336" height= {
     200
 } */

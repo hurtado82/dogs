@@ -15,7 +15,6 @@ export default function DogDetail() {
   }, [dispatch, id]);
   return (
     <div>
-      <h2>Detail</h2>
       {weight ? (
         <div>
           <h2>{name}</h2>
