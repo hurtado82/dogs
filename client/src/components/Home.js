@@ -1,9 +1,10 @@
 import "../css/Home.css";
 import Card from "./Card";
 import Header from "./Header";
-import loading from "../images/loading.gif";
 import { getDogs } from "../redux/actions";
 import { useEffect, useState } from "react";
+import loading from "../images/loading.gif";
+import defaultDog from "../images/default.jpg";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
@@ -25,7 +26,6 @@ export default function Home() {
       if(result.length >= NUMBER_OF_CARD) {
         numberOfPage = Math.floor(result.length / NUMBER_OF_CARD) 
       }
-      console.log(result, Math.floor( numberOfPage ));
       return result.slice(currentPage, currentPage + NUMBER_OF_CARD);
     }
     return dogs.slice(currentPage, currentPage + NUMBER_OF_CARD);
@@ -36,15 +36,12 @@ export default function Home() {
     };
   const clickOnSearch = () => {
     setCurrentPage(0);
-    console.log("se hizo click");
   }
   const next = () => {
     setCounter(counter + 1);
-    console.log(currentPage, filteredDogs().length);
     if (filteredDogs().length === 8)
       setCurrentPage(currentPage + NUMBER_OF_CARD);
     else if (counter === numberOfPage) setCounter(0);
-    console.log(currentPage, numberOfPage);
   };
   const prev = () => {
     if(currentPage > 0) setCurrentPage(currentPage - NUMBER_OF_CARD);
@@ -52,7 +49,8 @@ export default function Home() {
   return (
     <div>
       <Header select={select}
-      clickOnSearch={clickOnSearch} />
+        clickOnSearch={clickOnSearch}
+      />
       <button onClick={prev}>Prev</button>
       <button onClick={next}>Next</button>
       <section className="container-cards">
@@ -64,7 +62,7 @@ export default function Home() {
                     id={dog.id}
                     name={dog.name}
                     key={dog.id}
-                    image={dog.image.url}
+                    image={dog.image ? dog.image.url : defaultDog}
                     weight={dog.weight.metric}
                     temperament={dog.temperament}
                   />

@@ -13,22 +13,20 @@ export default function Create() {
   });
   const { name, heightMin, heightMax, weightMin, weightMax, age, temperament } = input
   const handleSubmit = (e) => {
-    e.preventDefault()
-    
+    e.preventDefault()    
     fetch("http://localhost:3001/dogs", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: name,
-        height: heightMin,
+        height: `${heightMin} - ${heightMax}`,
         weight: `${weightMin} - ${weightMax}`,
         age: age,
         temperament: temperament,
       }),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
-    console.log(input)
+      .then((result) => console.log(result, " result fetch"));
   }
 
   const handleInputChange = (e) => {
@@ -37,9 +35,7 @@ export default function Create() {
       ...input,
       [name]: value
     })
-    console.log(input);
   }
-
   return (
     <div className="main">
       <form onSubmit={handleSubmit}>
@@ -79,7 +75,7 @@ export default function Create() {
             <input
               type="text"
               name="weightMin"
-              value={weightMax}
+              value={weightMin}
               onChange={handleInputChange}
             />
           </label>
@@ -87,10 +83,11 @@ export default function Create() {
           <label className="label-form" name="weightMax">
             <span className="label-span">Weight max: </span>
             <input
-            type="text"
-            name="weightMax"
-            value={weightMax}
-            onChange={handleInputChange} />
+              type="text"
+              name="weightMax"
+              value={weightMax}
+              onChange={handleInputChange}
+            />
           </label>
 
           <label className="label-form" name="age">

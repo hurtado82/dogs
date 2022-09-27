@@ -1,9 +1,15 @@
-const { DataTypes } = require("sequelize")
+const { DataTypes, Sequelize, BulkRecordError } = require("sequelize")
+const { Breed } = require("./Breed")
 
 module.exports = (sequelize) => {
-  sequelize.define("temperament", {
-    name: {
-      type: DataTypes.STRING,
+  sequelize.define("temperament",
+    {
+      name: {
+        type: DataTypes.STRING,
+      },
     },
-  });
+    {
+      timestamps: false,
+    }
+  );
 };
