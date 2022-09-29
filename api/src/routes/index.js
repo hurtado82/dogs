@@ -39,16 +39,16 @@ router.get("/dogs", async (req, res) => {
     .then((data) => data.data)
     .then((breeds) => {
       try {
+        let breedsDb = organizationArray(arrayFromDb, breeds);
         if (name) {
-          const nameSearch = breeds.filter(
+          const nameSearch = [ ...breeds, ...breedsDb ].filter(
             (b) => b.name.toLowerCase().includes(name.toLowerCase()) === true
           );
           if (!nameSearch.length) return res.status(404).send("Breed no found");
           else res.status(200).send(nameSearch);
 
         } else {
-          let breedsDb = organizationArray(arrayFromDb, breeds);
-          return res.status(200).send([...breeds, ...breedsDb]);
+          res.status(200).send([...breeds, ...breedsDb]);
         }
     }catch(error) {
       res.sendStatus().send(error)
@@ -101,18 +101,46 @@ router.get("/temperaments", (req, res) => {
     axios.get("https://api.thedogapi.com/v1/breeds")
     .then(res => res.data)
     .then(temps => {
-      let tempsFound = [];
-      let filtered;
-      temps.map((t, i) =>
-        t.temperament?.split(",").map((element) => tempsFound.push(element)) );
-      filtered = [...new Set(tempsFound)]
-      console.log("fjf",filtered.length);
-      res.status(200).send(filtered);
+      // let tempsFound = [];
+      // let filtered;
+      // temps.map((t) =>
+      //   t.temperament?.split(", ").map((element) => tempsFound.push(element)) );
+      // filtered = [...new Set(tempsFound)]
+      // console.log("fjf",filtered.length);
+    
+      // let sep = filtered.map((t) => t)
+      //   let ordered = sep.sort((a, b) => {
+      //     if (a > b) return -1;
+      //     if (a < b) return 1;
+      //     return 0;
+      //   });
+
+      var fin = temps.sort((a, b) => {
+        if (a.weight.metric.split(" - ")[1] < b.weight.metric.split(" - ")[1]) return -1;
+        if( a.weight.metric.split(" - ")[1] > b.weight.metric.split(" - ")[1]) return 1
+        return 0
+        // let final = metric.split(" - ")[1];
+          // return final;
+        });
+      // let otro = fin.sort((a, b) => a - b);
+        
+      res.status(200).send(fin);
     })
   } catch(error) {
     res.sendStatus().send(error);
   }
 })
+
+router.get("/control", (req, res) => {
+  try {
+    axios.get("https://api.thedogapi.com/v1/breeds")
+    .then(res => res.data)
+    .then(temps => res.status(200).send(temps))
+  }catch(error) {
+    res.sendStatus.send(error)
+  }
+})
+
 //----------------test only-----------------------------
 
 router.post("/test", async(req, res) => {  
