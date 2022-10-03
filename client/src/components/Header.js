@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import "../css/Header.css"
 import Search from "./Search"
+import { Link } from "react-router-dom";
 
 function Header({ select, clickOnSearch }) {
   return (

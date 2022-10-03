@@ -1,21 +1,80 @@
 .main {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
 }
 
-.container-form {
+form {
+  background: aqua;
+  width: 415px;
+  height: 450px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
   padding: 3rem;
-  background-color: aqua;
-  display: grid; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-/* form {
-    width: 40%;
-} */
-.label-form {
-    width: 30%;
-    text-align: left;
-    padding-top:0.5rem ;
+.contain-input-name{
+  display: grid;
+  
+}
+
+.label-form-name {
+  display: grid;
+}
+.label-span-name {
+  text-align: left;
+  margin-bottom: 5px;
+}
+.temperament-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px
+}
+
+.text-area-form {
+display: flex;
+justify-content: space-between;
+}
+
+#warning {
+  font-size: 12px;
+  text-align: left;
+  color: red;
+}
+
+.warningName {
+  display: none;
+}
+.input {
+ width: 60px;
+}
+
+
+.title {
+}
+.w-and-h-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+
+textarea {
+  resize: none;
+}
+
+.class-required {
+  font-size: 12px;
+  color: red;
+
+}
+
+.class-created {
+  color: black;
+  font-size: 16px;
+  color: green
 }

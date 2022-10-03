@@ -1,3 +1,4 @@
+import Loading from "./Loading";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import defaultDog from "../images/default.jpg"
@@ -10,10 +11,10 @@ export default function DogDetail() {
   );
   const { id } = useParams()
   const dispatch = useDispatch();
-  
   useEffect(() => {
     dispatch(getDogDetail(id));
   }, [dispatch, id]);
+  
   return (
     <div>
       {weight ? (
@@ -25,7 +26,9 @@ export default function DogDetail() {
           <p>Weight: {weight?.metric || weight}</p>
           <p>Height: {height?.metric || height}</p>
         </div>
-      ) : null}
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

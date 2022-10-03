@@ -11,7 +11,7 @@ export function getDogs(byName) {
         .then((res) => res.json())
         .then((dogs) => {
           dispatch({ type: GET_DOGS, payload: dogs });
-        }); 
+        }).catch(error => console.log(error)); 
     }else {
       fetch(`http://localhost:3001/dogs`)
         .then((res) => res.json())

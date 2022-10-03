@@ -9,6 +9,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+
 const getDataBase = async ()=>{
   const allDb = await Breed.findAll({
     include: {
@@ -34,26 +35,25 @@ const organizationArray = (array, lengthArray) => {
 router.get("/dogs", async (req, res) => {
   const { name } = req.query;
   let arrayFromDb = await getDataBase();
-  axios
+  try {
+    axios
     .get("https://api.thedogapi.com/v1/breeds")
     .then((data) => data.data)
     .then((breeds) => {
-      try {
-        let breedsDb = organizationArray(arrayFromDb, breeds);
-        if (name) {
-          const nameSearch = [ ...breeds, ...breedsDb ].filter(
-            (b) => b.name.toLowerCase().includes(name.toLowerCase()) === true
-          );
-          if (!nameSearch.length) return res.status(404).send("Breed no found");
-          else res.status(200).send(nameSearch);
+          let breedsDb = organizationArray(arrayFromDb, breeds);
+          if (name) {
+            const nameSearch = [ ...breeds, ...breedsDb ].filter(
+              (b) => b.name.toLowerCase().includes(name.toLowerCase()) === true);
+            if (!nameSearch.length) return res.status(404).send("Breed no found");
+            else res.status(200).send(nameSearch);
 
-        } else {
-          res.status(200).send([...breeds, ...breedsDb]);
-        }
-    }catch(error) {
-      res.sendStatus().send(error)
-    }
-  });
+          } else {
+            res.status(200).send([...breeds, ...breedsDb]);
+          }
+        });
+  }catch(error) {
+    res.sendStatus().send(error)
+  }
 });
 
 router.get("/dogs/:id", async (req, res) => {

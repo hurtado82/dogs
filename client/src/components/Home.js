@@ -1,8 +1,8 @@
 import "../css/Home.css";
 import Card from "./Card";
 import Header from "./Header";
+import Loading from "./Loading";
 import { useEffect, useState } from "react";
-import loading from "../images/loading.gif";
 import defaultDog from "../images/default.jpg";
 import { getControl, getDogs } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,81 +20,101 @@ export default function Home() {
   useEffect(() => {
     dispatch(getDogs());
     dispatch(getControl());
-  }, []);
+  }, [dispatch, selectOption]);
 
   const orderBy = (arrayToOrder, order) => {
     let max = Math.max(...control.map((f) => f.id));
     let created = arrayToOrder.filter((c) => c.id > max);
-    if(order === "created") {
-      arrayToOrder = created
+    if (order === "created") {
+      arrayToOrder = created;
     }
 
-      let ordered = arrayToOrder.sort((a, b) => {
-        let a1 = a.name.toLowerCase();
-        let b1 = b.name.toLowerCase();
-        let arr1 = a.weight.metric?.trim().split("-")[0];
-        let arr2 = b.weight.metric?.trim().split("-")[0];
-        switch (order) {
-          case "a-z":
-            if (a1 < b1) return -1;
-            if (a1 > b1) return 1;
+    let ordered = arrayToOrder.sort((a, b) => {
+      let arrfirst = null
+      let arrsecond = null
+      let a1 = a.name.toLowerCase();
+      let b1 = b.name.toLowerCase();
+      let arr1 = a.weight.metric?.trim().split("-")[0].trim() || a.weight.trim().split("-")[0].trim();
+      let arr2 = b.weight.metric?.trim().split("-")[0].trim() || b.weight.trim().split("-")[0].trim();
+
+      if (arr1 !== NaN && arr1 !== undefined && arr1 !== "NaN") arrfirst = arr1
+      if (arr2 !== NaN && arr2 !== undefined && arr2 !== "NaN") arrsecond = arr2
+       
+      switch (order) {
+        case "a-z":
+          if (a1 < b1) return -1;
+          if (a1 > b1) return 1;
+          return 0;
+
+        case "z-a":
+          if (a1 > b1) return -1;
+          if (a1 < b1) return 1;
+          return 0;
+
+        case "weightAsc":
+            if (Number(arrfirst) < Number(arrsecond)) return -1;
+            if (Number(arrfirst) > Number(arrsecond)) return 1;
             return 0;
 
-          case "z-a":
-            if (a1 > b1) return -1;
-            if (a1 < b1) return 1;
-            return 0;
+        case "weightDes":
+          if (Number(arrfirst) > Number(arrsecond)) return -1;
+          if (Number(arrfirst) < Number(arrsecond)) return 1;
+          return 0;
 
-          case "weightAsc":
-            if (arr1 < arr2) return -1;
-            if (arr1 > arr2) return 1;
-            return 0;
+        default:
+      }
+    });
+    return ordered;
+  };;
 
-          case "weightDes":
-            if (arr1 > arr2) return -1;
-            if (arr1 < arr2) return 1;
-            return 0;
-
-          default:           
-        }
-      });  
-      return ordered  
-  };
-
-  let numberOfPage = null;
   const NUMBER_OF_CARD = 8;
+  let numberOfPage = null
+  const stopPagination = (array) => {
+    let number = Math.ceil(array.length / NUMBER_OF_CARD);
+    return number
+  }
+  
   const filteredDogs = () => {
     if (selectOption) {
-      const result = dogs.filter((f) =>
+      let result = dogs.filter((f) =>
         f.temperament?.toLowerCase().includes(selectOption.toLowerCase())
       );
-      console.log(result)
-      // if(result.length >= NUMBER_OF_CARD) {
-      //   numberOfPage = Math.floor(result.length / NUMBER_OF_CARD) 
-      // }
+      console.log(result);
+      if (selectOrderBy) { 
+        result = orderBy(result, selectOrderBy);
+      } 
+
+      numberOfPage = stopPagination(result);
       return result.slice(currentPage, currentPage + NUMBER_OF_CARD);
     }
     if (selectOrderBy) {
       let orderDog = orderBy(dogs, selectOrderBy)
-       return orderDog.slice(currentPage, currentPage + NUMBER_OF_CARD);
+      numberOfPage = stopPagination(orderDog);
+      return orderDog.slice(currentPage, currentPage + NUMBER_OF_CARD);
     }
-      return dogs.slice(currentPage, currentPage + NUMBER_OF_CARD);
+    numberOfPage = stopPagination(dogs);
+    return dogs.slice(currentPage, currentPage + NUMBER_OF_CARD);
   }; 
 
   const select = () => {
       setCurrentPage(0);
+      setCounter(1)
     };
   const clickOnSearch = () => {
     setCurrentPage(0);
   }
   const next = () => {
+    if (numberOfPage === 0) return
     setCounter(counter + 1);
-    if (filteredDogs().length === NUMBER_OF_CARD)
+    console.log(numberOfPage, "counter", counter)
+    if (numberOfPage !== counter)
       setCurrentPage(currentPage + NUMBER_OF_CARD);
-    else if (counter === numberOfPage) setCounter(0);
+    else if (counter === numberOfPage) setCounter(numberOfPage);
   };
 
   const prev = () => {
+   if(counter > 1) setCounter(counter - 1);
+    console.log(numberOfPage, "counter", counter);
     if(currentPage > 0) setCurrentPage(currentPage - NUMBER_OF_CARD);
   };
   return (
@@ -106,7 +126,7 @@ export default function Home() {
       <button onClick={next}>Next</button>
       <section className="container-cards">
         {dogs.length === 0 ? (
-          <img src={loading} alt="Loading" />
+          <Loading />
           ) : (
                 filteredDogs()?.map((dog) => (
                   <Card

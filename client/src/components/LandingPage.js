@@ -7,7 +7,7 @@ export default function LandingPage() {
       <div className="container-landing">
         <h1>Hi!, welcome to Dogs World</h1>
         <Link to={"/dogs"}>
-          <button> More</button>
+          <button className="btn-landing-page"> More</button>
         </Link>
       </div>
     </section>

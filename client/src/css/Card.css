@@ -1,6 +1,10 @@
-/* .card-box {
-  
-} */
+.name-card {
+  color: black;
+}
 .temperament {
   color: white;
+}
+
+.data {
+  color: black;
 }
