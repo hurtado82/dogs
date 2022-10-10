@@ -6,3 +6,12 @@
     align-items: center;
     height: fit-content;
 }
+.title-landing {
+}
+
+.main-container div a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+
+}

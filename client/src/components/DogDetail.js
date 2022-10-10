@@ -1,3 +1,4 @@
+import "../css/DogDetail.css"
 import Loading from "./Loading";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -16,15 +17,17 @@ export default function DogDetail() {
   }, [dispatch, id]);
   
   return (
-    <div>
+    <div className="container-dog-detail">
       {weight ? (
-        <div>
+        <div className="main-dog-detail">
           <h2>{name}</h2>
-          <img src={image ? image.url : defaultDog} width="600" alt={name} />
-          <p>Temperament: {temperament}</p>
-          <p>Age: {life_span || age}</p>
-          <p>Weight: {weight?.metric || weight}</p>
-          <p>Height: {height?.metric || height}</p>
+          <img className="img-dog-detail" src={image ? image.url : defaultDog} width="600" alt={name} />
+          <div className="contain-text-dog-detail">
+            <p className="temperament-dog-detail">Temperament: {temperament}</p>
+            <p>Age: {life_span || age}</p>
+            <p>Weight: {weight?.metric || weight}</p>
+            <p>Height: {height?.metric || height}</p>
+          </div>
         </div>
       ) : (
         <Loading />

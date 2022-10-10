@@ -22,7 +22,6 @@ export const chooseTempSelect = (array) => {
    };
 
   const handleClick = () => {
-      document.getElementById("search").onfocus(console.log("SE HIZO FOCO"))
     if (input) {
       dispatch(getDogs(input));
       props.clickOnSearch()

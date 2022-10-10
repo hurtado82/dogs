@@ -1,10 +1,29 @@
+
+.continer-cards {
+  background-color: #00000096;
+}
 .name-card {
-  color: black;
+  position: absolute;
+  padding-left: 10px;
+  padding-top: 4px;
+  padding: 4px;
+  color: white;
+  background:#00000096 ;
+}
+.name-card:hover {
+ color: white;
+ 
 }
 .temperament {
   color: white;
+  text-align: left;
 }
 
 .data {
-  color: black;
+  color: white;
+  text-align: right;
+  padding: 5px 0 5px
+}
+.card-box {
+  /* height: 100%; */
 }

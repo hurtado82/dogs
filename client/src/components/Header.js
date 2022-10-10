@@ -6,7 +6,7 @@ function Header({ select, clickOnSearch }) {
   return (
     <header className="main-container">
       <div>
-        <h1>Dogs World</h1>
+        <Link to={"/"}>  <h1 className="title-landing">Dogs World</h1></Link>
       </div>
       <Link to={"create"}>
         <button >Create</button>

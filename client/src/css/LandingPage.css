@@ -4,14 +4,17 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 110px;
+    gap: 40vh;
+    justify-content: flex-start;
 }
 
 h1 {
     font-size: 36px;
+    padding-top: 10px;
 }
 
 .btn-landing-page {
-    width: 132px;
-    height: 25px;
+    width: 100px;
+    height: 40px;
+    border-radius: 17px;
 }

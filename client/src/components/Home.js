@@ -7,6 +7,7 @@ import defaultDog from "../images/default.jpg";
 import { getControl, getDogs } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
+
 export default function Home() {
   const dispatch = useDispatch();
   const [counter, setCounter] = useState(1);
@@ -118,29 +119,31 @@ export default function Home() {
     if(currentPage > 0) setCurrentPage(currentPage - NUMBER_OF_CARD);
   };
   return (
-    <div>
+    <div className="main-home">
       <Header select={select}
         clickOnSearch={clickOnSearch}
       />
-      <button onClick={prev}>Prev</button>
-      <button onClick={next}>Next</button>
       <section className="container-cards">
+      <button className="btn-right" onClick={next}>V</button>
+      <button className="btn-left" onClick={prev} >V</button>
         {dogs.length === 0 ? (
           <Loading />
           ) : (
-                filteredDogs()?.map((dog) => (
-                  <Card
-                    id={dog.id}
-                    name={dog.name}
-                    key={dog.id}
-                    image={dog.image?.url || defaultDog}
-                    weight={dog.weight.metric || dog.weight}
-                    temperament={dog.temperament}
-                  />
-                ))
+            filteredDogs()?.map((dog) => (
+              <Card
+              id={dog.id}
+              name={dog.name}
+              key={dog.id}
+              image={dog.image?.url || defaultDog}
+              weight={dog.weight.metric || dog.weight}
+              temperament={dog.temperament}
+              age={dog.life_span || dog.age}
+              />
+              ))
               )
-        }
+            }
       </section>
-    </div>
+       </div>     
+    // </div>
   );
 }

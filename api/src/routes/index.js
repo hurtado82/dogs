@@ -9,7 +9,6 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-
 const getDataBase = async ()=>{
   const allDb = await Breed.findAll({
     include: {
@@ -56,8 +55,9 @@ router.get("/dogs", async (req, res) => {
   }
 });
 
-router.get("/dogs/:id", async (req, res) => {
-  const { id } = req.params
+router.get("/dogs/id", async (req, res) => {
+  const { id } = req.query
+  console.log("idd", id)
   let arrayFromDbId = await getDataBase();
   const filterById = (array, ID) => {
     const search = array.filter((b) => b.id === parseInt(ID));
@@ -170,5 +170,7 @@ router.get("/test", async(req, res) => {
   res.status(200).send(findB);
 })
 //------------------------end test-------------------------------------
+
+
 
 module.exports = router;
