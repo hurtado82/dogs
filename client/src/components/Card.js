@@ -5,14 +5,17 @@ export default function Card({ id, name, image, weight, temperament, height, age
   return (
     <div className="container-card">
       <div className="card-box" >
-        <Link to={`/dogs/${id}`}>
-          <h4 className="name-card">{name}</h4>
-          <img src={image} width="336" height={200} alt={name} />
-          <div className="data">Weight: {weight}</div>
-          <div className="temperament">Temperament: {temperament}</div>
+          <Link to={`/dogs/${id}`} className = "link">
+              <h4 className="name-card">{name}</h4>
+              <img src={image} width="336" height={310} alt={name} className="img" />
+              <div className="contain">
+                <div className="data">Weight: {weight}</div>
+                <div className="temperament">
+                  Temperament: {temperament}
+                </div>
+              </div>
+          </Link>
           <div className="data">{height}</div>
-          <div className="data">{age}</div>
-        </Link>
       </div>
     </div>
   );

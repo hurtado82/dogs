@@ -68,7 +68,7 @@ export default function Home() {
     return ordered;
   };;
 
-  const NUMBER_OF_CARD = 8;
+  const NUMBER_OF_CARD = 6;
   let numberOfPage = null
   const stopPagination = (array) => {
     let number = Math.ceil(array.length / NUMBER_OF_CARD);
@@ -137,7 +137,6 @@ export default function Home() {
               image={dog.image?.url || defaultDog}
               weight={dog.weight.metric || dog.weight}
               temperament={dog.temperament}
-              age={dog.life_span || dog.age}
               />
               ))
               )

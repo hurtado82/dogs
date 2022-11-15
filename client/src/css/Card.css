@@ -10,20 +10,38 @@
   color: white;
   background:#00000096 ;
 }
-.name-card:hover {
- color: white;
- 
+.card-box:hover .contain {
+background: #00000099;
+opacity: 1;
 }
-.temperament {
+
+.contain {
   color: white;
-  text-align: left;
+  text-align: center;
+  position: absolute;
+  padding: 1.5rem;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  transition: .5s;
+  width: 40%;
+  min-height: 40%;
+  border-radius: 50px 0px 0px 0px / 25% 0px 0px 0px;
+}
+
+.temperament {
+text-align: left;
+margin-top: 8px;
+
 }
 
 .data {
-  color: white;
-  text-align: right;
-  padding: 5px 0 5px
+  /* text-align: right; */
+  padding-right: 2px;
+  text-decoration: underline;
+  
+  
 }
 .card-box {
-  /* height: 100%; */
+  position: relative;
 }

@@ -55,9 +55,8 @@ router.get("/dogs", async (req, res) => {
   }
 });
 
-router.get("/dogs/id", async (req, res) => {
-  const { id } = req.query
-  console.log("idd", id)
+router.get("/dogs/:id", async (req, res) => {
+  const { id } = req.params
   let arrayFromDbId = await getDataBase();
   const filterById = (array, ID) => {
     const search = array.filter((b) => b.id === parseInt(ID));
