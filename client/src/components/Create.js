@@ -28,10 +28,10 @@ export default function Create() {
       return (warningRequired.innerHTML = "All fields are required");
     } 
 
-    if (heightMin && heightMax && Number(weightMin) > Number(weightMax)) return alert("Height: max no puede ser menor a min");
+    if (heightMin && heightMax && Number(weightMin) > Number(weightMax)) return alert("Weight: max no puede ser menor a min");
       
     if (weightMin && weightMax && Number(heightMin) > Number(heightMax))
-      return alert("Weight: max no puede ser menor a min");
+      return alert("Height: max no puede ser menor a min");
   
     fetch("http://localhost:3001/dogs", {
       method: "post",
