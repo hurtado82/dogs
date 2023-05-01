@@ -10,32 +10,22 @@
   display: block;
 }
 
-.btn-left {
+.btn-prev-next {
   position: absolute;
-  right: 95%;
   top: 45%;
-  transform: rotate(90deg);
   font-size: 38px;
   background:#52b115c9;
-  border: none;
   border-radius: 30px;
   height: 60px;
   width: 38px;
   z-index: 1;
-}
+} 
 
 .btn-right {
-  position: absolute;
   left: 95%;
-  top: 45%;
-  transform: rotate(-90deg);
-  font-size: 38px;
-  background: #52b115c9;
-  border: none;
-  border-radius: 30px;
-  height: 60px;
-  width: 38px;
-  z-index: 1;
 }
 
-
+.btn-left {
+  right: 95%;
+  transform: rotate(180deg);
+}

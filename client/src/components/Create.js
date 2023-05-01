@@ -1,5 +1,6 @@
 import "../css/Create.css"
 import { useState } from "react"
+import ButtonBack from "./ButtonBack";
 import { useSelector } from "react-redux";
 import { chooseTempSelect } from "./Search"
 
@@ -19,6 +20,7 @@ export default function Create() {
   const [selectTemps, setSelectTemps] = useState("");
   const [input, setInput] = useState(initialState);
   const { name, heightMin, heightMax, weightMin, weightMax, age, temperament } = input
+  const expresion = /^[a-zA-Z ]*$/;
 
   const handleSubmit = (e) => {
     e.preventDefault()    
@@ -57,18 +59,17 @@ export default function Create() {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     if (
-      (name === "weightMin" && value.length > 4) ||
-      (name === "weightMax" && value.length > 4) ||
-      (name === "heightMin" && value.length > 4) ||
-      (name === "heightMax" && value.length > 4) ||
-      (name === "age" && value.length > 4)
+      (name === "weightMin" && value.length > 3) ||
+      (name === "weightMax" && value.length > 3) ||
+      (name === "heightMin" && value.length > 3) ||
+      (name === "heightMax" && value.length > 3) ||
+      (name === "age" && value.length > 2)
     ) return; 
     
-    let expresion = /^[a-zA-Z ]*$/;
     let warningName = document.getElementById("warning")
     let warning = document.getElementById("input-name-id")
     if(name === "name" && !expresion.test(value)){
-      warningName.innerHTML = "Numbers and symbols not allowed";
+      warningName.innerHTML = "Numbers and symbols are not allowed";
       warning.style.borderColor = "red"
       warning.style.color = "red"
     } else {
@@ -94,10 +95,14 @@ export default function Create() {
     
   }
 
-  const handleClick = (e) =>{
+  const handleClick = (e) => {
     e.preventDefault(e);
     input.temperament = ""
     setSelectTemps("")
+  }
+
+  const handleBlur = (e) => {
+    if(!expresion.test(e.target.value)) e.target.value = ""
   }
 
   return (
@@ -105,9 +110,10 @@ export default function Create() {
       <form onSubmit={handleSubmit}>
         <div>
           <div className="container-form">
-            <div className="contain-input-name">
+            <div id="warning"></div>
+            <div className="w-and-h-form">
               <label className="label-form-name" name="name">
-                <span className="label-span-name">Name: </span>
+                <span className="label-span-name title">Name </span>
                 <input
                   id="input-name-id"
                   className="input-name"
@@ -115,8 +121,9 @@ export default function Create() {
                   name="name"
                   value={name}
                   onChange={handleInputChange}
+                  onBlur={handleBlur}
+                  autoComplete={"off"}
                 />
-                <div id="warning"></div>
               </label>
             </div>
 
@@ -130,6 +137,7 @@ export default function Create() {
                   name="heightMin"
                   value={heightMin}
                   onChange={handleInputChange}
+                  autoComplete={"off"}
                 />
               </label>
 
@@ -141,6 +149,7 @@ export default function Create() {
                   name="heightMax"
                   value={heightMax}
                   onChange={handleInputChange}
+                  autoComplete={"off"}
                 />
               </label>
             </div>
@@ -155,6 +164,7 @@ export default function Create() {
                   name="weightMin"
                   value={weightMin}
                   onChange={handleInputChange}
+                  autoComplete={"off"}
                 />
               </label>
 
@@ -166,6 +176,7 @@ export default function Create() {
                   name="weightMax"
                   value={weightMax}
                   onChange={handleInputChange}
+                  autoComplete={"off"}
                 />
               </label>
             </div>
@@ -191,6 +202,7 @@ export default function Create() {
                 name="age"
                 value={age}
                 onChange={handleInputChange}
+                autoComplete={"off"}
               />
             </label>
           </div>
@@ -202,15 +214,16 @@ export default function Create() {
               type="text"
               name="temperament"
               value={input.temperament}
-              placeholder = "Choose 1 or several temperaments"
+              placeholder = "Choose temperaments"
               onChange={handleInputChange}
             />
             <button onClick={handleClick}>Clear</button>
           </div>
-          <input type="submit" value={"Create"} />
+          <input type="submit" value={"Create"} className={"btn-create"}/>
         </div>
         <div id="required" className="class-required"></div>
       </form>
+      <ButtonBack />
     </div>
   );
 }

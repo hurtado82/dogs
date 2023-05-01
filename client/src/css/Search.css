@@ -1,0 +1,42 @@
+.search-container {
+  display: flex;
+  width: fit-content;
+  background-color: white;
+  margin-right: 3rem;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0 1rem 0 0;
+}
+
+select {
+  border-radius: 9999px;
+  border: none;
+  padding: 0.5rem;
+  border-right: 1px solid black;
+  outline: none;
+}
+
+.input-search {
+  border: none;
+  outline: none;
+  margin-left: 0.5rem;
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+.icon {
+  margin-left: 0.3rem;
+  cursor: pointer;
+}
+.btn-create {
+  border: none;
+  background-color: white;
+  border-radius: 9999px;
+  border-right: 1px solid black;
+  padding: 0.5rem 1.2rem;
+  margin: 0 0.1rem;
+  box-shadow: 1px 0 6px #333 inset;
+  cursor: pointer;
+}

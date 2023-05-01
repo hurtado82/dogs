@@ -17,4 +17,5 @@ h1 {
     width: 100px;
     height: 40px;
     border-radius: 17px;
+    cursor: pointer;
 }

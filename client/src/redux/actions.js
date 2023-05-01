@@ -13,22 +13,30 @@ export function getDogs(byName) {
           dispatch({ type: GET_DOGS, payload: dogs });
         }).catch(error => console.log(error)); 
     }else {
-      fetch(`http://localhost:3001/dogs`)
+      try {
+        fetch(`http://localhost:3001/dogs`)
         .then((res) => res.json())
         .then((dogs) => {
           dispatch({ type: GET_DOGS, payload: dogs });
-      }); 
+        }); 
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
 
 export function getDogDetail(id) {
   return function(dispatch) {
-    fetch(`http://localhost:3001/dogs/${id}`)
-    .then((res) => res.json())
-    .then((detail) => {
-      dispatch({ type: GET_DOG_DETAIL, payload: detail });
-    }); 
+    try {
+      fetch(`http://localhost:3001/dogs/${id}`)
+      .then((res) => res.json())
+      .then((detail) => {
+        dispatch({ type: GET_DOG_DETAIL, payload: detail });
+      }); 
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

@@ -2,6 +2,7 @@ import "../css/Home.css";
 import Card from "./Card";
 import Header from "./Header";
 import Loading from "./Loading";
+import { GrNext } from "react-icons/gr"
 import { useEffect, useState } from "react";
 import defaultDog from "../images/default.jpg";
 import { getControl, getDogs } from "../redux/actions";
@@ -9,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export default function Home() {
+
   const dispatch = useDispatch();
   const [counter, setCounter] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
@@ -16,7 +18,6 @@ export default function Home() {
   const control = useSelector((state) => state.getControl);
   const selectOption = useSelector((state) => state.selectOption);
   const selectOrderBy = useSelector((state) => state.selectOrderBy);
-
 
   useEffect(() => {
     dispatch(getDogs());
@@ -38,8 +39,8 @@ export default function Home() {
       let arr1 = a.weight.metric?.trim().split("-")[0].trim() || a.weight.trim().split("-")[0].trim();
       let arr2 = b.weight.metric?.trim().split("-")[0].trim() || b.weight.trim().split("-")[0].trim();
 
-      if (arr1 !== NaN && arr1 !== undefined && arr1 !== "NaN") arrfirst = arr1
-      if (arr2 !== NaN && arr2 !== undefined && arr2 !== "NaN") arrsecond = arr2
+      if (arr1 !== isNaN() && arr1 !== undefined && arr1 !== "NaN") arrfirst = arr1
+      if (arr2 !== isNaN() && arr2 !== undefined && arr2 !== "NaN") arrsecond = arr2
        
       switch (order) {
         case "a-z":
@@ -124,8 +125,8 @@ export default function Home() {
         clickOnSearch={clickOnSearch}
       />
       <section className="container-cards">
-      <button className="btn-right" onClick={next}>V</button>
-      <button className="btn-left" onClick={prev} >V</button>
+        <GrNext className="btn-right btn-prev-next" onClick={next} />
+        <GrNext className="btn-left btn-prev-next" onClick={prev} />
         {dogs.length === 0 ? (
           <Loading />
           ) : (

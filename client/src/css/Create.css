@@ -7,9 +7,8 @@
 }
 
 form {
-  background: aqua;
+  background: #0009;
   width: 415px;
-  height: 450px;
   flex-wrap: wrap;
   box-sizing: border-box;
   padding: 3rem;
@@ -17,64 +16,94 @@ form {
   justify-content: center;
   align-items: center;
 }
-.contain-input-name{
-  display: grid;
-  
+
+.input-name {
+  border: none;
+  border-bottom: 1px solid black;
+  margin-left: 1rem;
+  outline: none; 
 }
 
-.label-form-name {
-  display: grid;
-}
-.label-span-name {
-  text-align: left;
-  margin-bottom: 5px;
-}
 .temperament-form {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  margin: 25px 0;
+  background-color: white;
+  border-radius: 9999px;
 }
 
 .text-area-form {
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
 #warning {
   font-size: 12px;
-  text-align: left;
-  color: red;
+  color: orange;
+  padding-left: 1rem;
 }
 
 .warningName {
   display: none;
 }
-.input {
- width: 60px;
-}
 
+.input {
+  width: 2.5rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+}
 
 .title {
+  border-right: 1px solid black;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
 }
+
 .w-and-h-form {
   display: flex;
-  justify-content: space-between;
   margin-bottom: 15px;
-  margin-top: 20px;
+  margin-top: 25px;
+  gap: 1rem;
+  background: white;
+  padding: 0.3rem;
+  border-radius: 9999px;
+  align-items: center;
+  height: 1.2rem;
+}
+
+.select-form {
+  padding: 0.3rem;
+  border-right: none;
 }
 
 textarea {
   resize: none;
 }
 
+textarea:placeholder-shown {
+  text-align: center;
+}
+
 .class-required {
   font-size: 12px;
-  color: red;
-
+  color: orange;
+  margin-top: 1rem;
 }
 
 .class-created {
   color: black;
   font-size: 16px;
-  color: green
+  color: lawngreen;
+  margin-top: 1rem;
+}
+
+.icon-back {
+  font-size: 2.5rem;
+  position: absolute;
+  right: 4rem;
+  top: 2rem;
+  color: rgb(151, 124, 124);
 }

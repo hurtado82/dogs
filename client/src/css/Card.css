@@ -11,8 +11,8 @@
   background:#00000096 ;
 }
 .card-box:hover .contain {
-background: #00000099;
-opacity: 1;
+  background: #00000099;
+  opacity: 1;
 }
 
 .contain {
@@ -25,23 +25,20 @@ opacity: 1;
   opacity: 0;
   transition: .5s;
   width: 40%;
-  min-height: 40%;
-  border-radius: 50px 0px 0px 0px / 25% 0px 0px 0px;
+  min-height: fit-content;
+  border-radius: 50px 0px 0px 0px;
 }
 
 .temperament {
-text-align: left;
-margin-top: 8px;
-
+  text-align: left;
+  margin-top: 8px;
 }
 
 .data {
-  /* text-align: right; */
   padding-right: 2px;
-  text-decoration: underline;
-  
-  
+  text-decoration: underline;  
 }
+
 .card-box {
   position: relative;
 }

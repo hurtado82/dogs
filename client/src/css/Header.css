@@ -1,17 +1,23 @@
 .main-container {
-    background: green;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: fit-content;
+  background: green;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
 }
+
+.title-container {
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+}
+
 .title-landing {
+  color: white;
 }
 
 .main-container div a {
   text-decoration: none;
   color: black;
   cursor: pointer;
-
 }

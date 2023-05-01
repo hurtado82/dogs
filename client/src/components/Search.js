@@ -1,6 +1,10 @@
- import { useState } from "react"
- import { useDispatch, useSelector } from "react-redux"
- import { getDogs, selectOption, selectOrderBy } from "../redux/actions";
+import "../css/Search.css"
+import { useRef } from "react";
+import { useState } from "react"
+import { Link } from "react-router-dom";
+import { TbSearch } from "react-icons/tb"
+import { useDispatch, useSelector } from "react-redux"
+import { getDogs, selectOption, selectOrderBy } from "../redux/actions";
 
 export const chooseTempSelect = (array) => {
   const tempsFinded = [];
@@ -10,23 +14,24 @@ export const chooseTempSelect = (array) => {
 };
 
  export default function Search(props) {
+   const refInput = useRef()
+   const dispatch = useDispatch();
    const [input, setInput] = useState("");
-
    const allDogs = useSelector((state) => state.getControl);
 
-   const dispatch = useDispatch();
-
    const handleInputChange = (e) => {
-     const { value } = e.target;
-     setInput(value);
+      const { value } = e.target;
+      setInput(value);
    };
 
   const handleClick = () => {
-    if (input) {
-      dispatch(getDogs(input));
-      props.clickOnSearch()
-      // dispatch(selectOption(""))
+    if(refInput.current?.classList.contains("visible")) {
+      if (input) {
+        dispatch(getDogs(input));
+        props.clickOnSearch()
+      }
     } 
+    refInput.current.classList.toggle("visible")
     setInput("")    
   };
 
@@ -43,32 +48,37 @@ export const chooseTempSelect = (array) => {
    };
 
    return (
-     <div>
-       <select className="select-filter" onChange={handleSelectOrderBy}>
-         <option value={""}>Filter by</option>
-         <option value={"a-z"}>a-Z</option>
-         <option value={"z-a"}>Z-a</option>
-         <option value={"created"}>Created</option>
-         <option value={"weightAsc"}>Weight asc</option>
-         <option value={"weightDes"}>Weight des</option>
-       </select>
-       <select id="filter" name="temps-filter" onChange={handleSelect}>
-         <option id="opt-temp" value="">Temperament</option>
-         {chooseTempSelect(allDogs).map((t, index) => {
-           return (
-             <option key={index} value={t}>
-               {t}
-             </option>
-           );
-         })}
-       </select>
+     <div className="search-container">
+        <Link to={"create"}>
+          <button className="btn-create">Create</button>
+        </Link>
+        <select className="select-filter" onChange={handleSelectOrderBy}>
+          <option value={""}>Filter by</option>
+          <option value={"a-z"}>a-Z</option>
+          <option value={"z-a"}>Z-a</option>
+          <option value={"created"}>Created</option>
+          <option value={"weightAsc"}>Weight asc</option>
+          <option value={"weightDes"}>Weight des</option>
+        </select>
+        <select id="filter" name="temps-filter" onChange={handleSelect}>
+          <option id="opt-temp" value="">Temperament</option>
+          {chooseTempSelect(allDogs).map((t, index) => {
+            return (
+              <option key={index} value={t}>
+                {t}
+              </option>
+            );
+          })}
+        </select>
        <input
-         id="search"
-         type={"text"}
-         onChange={handleInputChange}
-         value={input}
+          ref={refInput}
+          className={"input-search"}
+          id="search"
+          type={"text"}
+          onChange={handleInputChange}
+          value={input}
        />
-       <button onClick={handleClick}>Search</button>
-     </div>
+        <TbSearch onClick={handleClick} className={"icon"} />
+      </div>
    );
  }
