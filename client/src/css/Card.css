@@ -10,6 +10,12 @@
   color: white;
   background:#00000096 ;
 }
+
+.img {
+  width: 100%;
+  height: 50vh;
+}
+
 .card-box:hover .contain {
   background: #00000099;
   opacity: 1;

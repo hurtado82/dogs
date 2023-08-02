@@ -63,7 +63,7 @@ export default function Home() {
           if (Number(arrfirst) < Number(arrsecond)) return 1;
           return 0;
 
-        default:
+        default: return null
       }
     });
     return ordered;

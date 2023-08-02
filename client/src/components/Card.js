@@ -7,7 +7,7 @@ export default function Card({ id, name, image, weight, temperament, height, age
       <div className="card-box" >
           <Link to={`/dogs/${id}`} className = "link">
               <h4 className="name-card">{name}</h4>
-              <img src={image} width="336" height={310} alt={name} className="img" />
+              <img src={image} alt={name} className="img" />
               <div className="contain">
                 <div className="data">Weight: {weight}</div>
                 <div className="temperament">

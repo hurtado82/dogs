@@ -12,6 +12,10 @@
   display: flex;
 }
 
+.main-dog-detail h2{
+  color:white
+}
+
 .temperament-dog-detail {
   display: flex;
   padding: 8px;
